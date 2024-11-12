@@ -10,13 +10,13 @@ function App() {
     const [couponCode, setCouponCode] = useState("");
     const [discount, setDiscount] = useState(0);
 
-    // Load cart from localStorage on mount
+    // Load cart from localStorage on first render
     useEffect(() => {
         const savedCart = JSON.parse(localStorage.getItem("cart"));
-        if (savedCart) setCart(savedCart);
+        if (savedCart && Array.isArray(savedCart)) setCart(savedCart);
     }, []);
 
-    // Save cart to localStorage on cart change
+    // Save cart to localStorage whenever the cart changes
     useEffect(() => {
         localStorage.setItem("cart", JSON.stringify(cart));
     }, [cart]);
@@ -66,8 +66,8 @@ function App() {
         }
     };
 
-    // Calculate total number of unique items in the cart
-    const totalItemsInCart = cart.length;
+    // Calculate total number of items in the cart (sum of quantities)
+    const totalItemsInCart = cart.reduce((acc, item) => acc + item.quantity, 0);
 
     return (
         <div className="app">
@@ -84,7 +84,7 @@ function App() {
 
             <div className="cart">
                 <h2>Shopping Cart</h2>
-                <p>Total Individual Items in Cart: <strong>{totalItemsInCart}</strong></p>
+                <p>Total Items in Cart: <strong>{totalItemsInCart}</strong></p>
                 {cart.length === 0 ? (
                     <p>Your cart is empty</p>
                 ) : (
