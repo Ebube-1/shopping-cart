@@ -51,5 +51,17 @@ npm start
 	-	Apply a discount code by entering WEB3BRIDGECOHORTx and clicking Apply Coupon for a 10% discount.
 -	View the total cost and item count at the bottom of the cart.
 
+### Key Functionalities
+
+-	Add to Cart: Adds an item to the cart or updates its quantity if it’s already in the cart.
+-	Remove from Cart: Removes an item from the cart based on its ID.
+-	Update Quantity: Allows users to adjust the quantity of items in the cart.
+-	Apply Coupon: Validates and applies a discount to the total if the correct code is entered.
+-	Persist Cart in localStorage: Saves the cart to localStorage on change and loads it on page load.
+
+### Discount Code
+
+- The application includes a discount feature where users can enter **WEB3BRIDGECOHORTx** as a coupon code to receive a 10% discount on their cart total. This discount is applied only once and validated using a regular expression.
+
 
 
