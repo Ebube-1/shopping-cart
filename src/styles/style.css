@@ -1,7 +1,7 @@
 /* src/styles.css */
 
 .app {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
     font-family: Arial, sans-serif;
@@ -11,8 +11,17 @@ h1, h2, h3 {
     color: #333;
 }
 
-.product-list, .cart {
-    margin-bottom: 20px;
+.container {
+    display: flex;
+    gap: 20px;
+}
+
+/* Styling for Products section */
+.product-list {
+    flex: 1;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
 }
 
 .product {
@@ -23,8 +32,20 @@ h1, h2, h3 {
     border-bottom: 1px solid #ddd;
 }
 
+.product-list h2 {
+    text-align: center;
+}
+
+/* Styling for Cart section */
 .cart {
-    margin-top: 30px;
+    flex: 1;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.cart h2 {
+    text-align: center;
 }
 
 .cart-list {
@@ -34,24 +55,23 @@ h1, h2, h3 {
 
 .cart-item {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 10px;
     border-bottom: 1px solid #ddd;
     gap: 10px;
 }
 
-.cart-item span, .cart-item input, .cart-item button {
-    flex: 1;
-    text-align: center;
-}
-
 .cart-item-name {
-    flex: 2; /* Name cell gets a bit more space */
+    flex: 2;
     text-align: left;
 }
 
-.cart-item-price, .cart-item input, .cart-item button {
+.cart-item-price,
+.cart-item input,
+.cart-item button {
     flex: 1;
+    text-align: center;
 }
 
 input[type="number"] {

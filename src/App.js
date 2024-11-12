@@ -13,7 +13,9 @@ function App() {
     // Load cart from localStorage on first render
     useEffect(() => {
         const savedCart = JSON.parse(localStorage.getItem("cart"));
-        if (savedCart && Array.isArray(savedCart)) setCart(savedCart);
+        if (savedCart && Array.isArray(savedCart)) {
+            setCart(savedCart);
+        }
     }, []);
 
     // Save cart to localStorage whenever the cart changes
@@ -66,58 +68,60 @@ function App() {
         }
     };
 
-    // Calculate total number of items in the cart (sum of quantities)
+    // Calculate total number of items (sum of quantities) in the cart
     const totalItemsInCart = cart.reduce((acc, item) => acc + item.quantity, 0);
 
     return (
         <div className="app">
             <h1>Shopping Cart</h1>
-            <div className="product-list">
-                <h2>Products</h2>
-                {products.map((product) => (
-                    <div key={product.id} className="product">
-                        <span>{product.name} - ${product.price}</span>
-                        <button onClick={() => addToCart(product)}>Add to Cart</button>
-                    </div>
-                ))}
-            </div>
-
-            <div className="cart">
-                <h2>Shopping Cart</h2>
-                <p>Total Items in Cart: <strong>{totalItemsInCart}</strong></p>
-                {cart.length === 0 ? (
-                    <p>Your cart is empty</p>
-                ) : (
-                    <ul className="cart-list">
-                        {cart.map((item) => (
-                            <li key={item.id} className="cart-item">
-                                <span className="cart-item-name">{item.name}</span>
-                                <span className="cart-item-price">${item.price}</span>
-                                <input
-                                    type="number"
-                                    min="1"
-                                    value={item.quantity}
-                                    onChange={(e) =>
-                                        updateQuantity(item.id, parseInt(e.target.value, 10))
-                                    }
-                                />
-                                <button onClick={() => removeFromCart(item.id)}>Remove</button>
-                            </li>
-                        ))}
-                    </ul>
-                )}
-
-                <div className="coupon">
-                    <input
-                        type="text"
-                        placeholder="Enter coupon code"
-                        value={couponCode}
-                        onChange={(e) => setCouponCode(e.target.value)}
-                    />
-                    <button onClick={applyCoupon}>Apply Coupon</button>
+            <div className="container">
+                <div className="product-list">
+                    <h2>Products</h2>
+                    {products.map((product) => (
+                        <div key={product.id} className="product">
+                            <span>{product.name} - ${product.price}</span>
+                            <button onClick={() => addToCart(product)}>Add to Cart</button>
+                        </div>
+                    ))}
                 </div>
 
-                <h3>Total: ${calculateTotal().toFixed(2)}</h3>
+                <div className="cart">
+                    <h2>Shopping Cart</h2>
+                    <p>Total Items in Cart: <strong>{totalItemsInCart}</strong></p>
+                    {cart.length === 0 ? (
+                        <p>Your cart is empty</p>
+                    ) : (
+                        <ul className="cart-list">
+                            {cart.map((item) => (
+                                <li key={item.id} className="cart-item">
+                                    <span className="cart-item-name">{item.name}</span>
+                                    <span className="cart-item-price">${item.price}</span>
+                                    <input
+                                        type="number"
+                                        min="1"
+                                        value={item.quantity}
+                                        onChange={(e) =>
+                                            updateQuantity(item.id, parseInt(e.target.value, 10))
+                                        }
+                                    />
+                                    <button onClick={() => removeFromCart(item.id)}>Remove</button>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+
+                    <div className="coupon">
+                        <input
+                            type="text"
+                            placeholder="Enter coupon code"
+                            value={couponCode}
+                            onChange={(e) => setCouponCode(e.target.value)}
+                        />
+                        <button onClick={applyCoupon}>Apply Coupon</button>
+                    </div>
+
+                    <h3>Total: ${calculateTotal().toFixed(2)}</h3>
+                </div>
             </div>
         </div>
     );
